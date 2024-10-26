@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CAZY - Outfit and Nail Inspiration">
+    <title>CAZY - Outfit & Nail Inspiration</title>
+    <style>
+        /* Resetting some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', sans-serif;
+        }
+
+        html, body {
+            height: 100%; /* Pastikan halaman menggunakan 100% tinggi layar */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content {
+            flex: 1;
+        }
+
+        /* Body and overall styling */
+        body {
+            background-color: #fce8eb;
+            color: #333;
+            line-height: 1.6;
+            font-family: Georgia, sans-serif;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #f0f5ff;
+            padding: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        h1 {
+            color: #cc3f67; 
+            text-align: center;
+            font-size: 50px;
+        }
+
+        nav {
+            margin: 15px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+
+        nav ul li {
+            margin: 15px 0;
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #cc3f67;
+            font-family: Georgia, sans-serif;
+            font-size: 20px;
+            font-weight:normal;
+            padding: 10px 15px;
+            margin-top: 20px;
+            line-height: 40px;
+        }
+
+        nav ul li a:hover {
+            color: #003285; 
+        }
+
+        /* Dropdown Styling */
+        .dropdown-content {
+            display:none;
+            position: absolute;
+            background-color: #edf5fe;
+            min-width: 160px;
+            z-index: 1000;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 5px 12px;
+            text-decoration: none;
+            display: block; 
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #7db4f8;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            max-width: 800px; /* Untuk membatasi lebar paragraf */
+            margin: 0 auto; /* Untuk membuat teks rata tengah */
+            padding: 10px;
+        }
+
+
+        /* Product grid styling */
+        .product-grid {
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+        }
+
+        .product-grid.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            background-color: white;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .product h3 {
+            font-size: 16px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .product p {
+            color: #666;
+        }
+
+        /* Home Section Styling */
+        #homepage {
+            text-align: center;
+            margin-top: 20px;
+            display: block; /* Homepage is visible initially */
+        }
+
+        #homepage h2{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Agar elemen-elemen diatur secara vertikal */
+            min-height: 200px; /* Memastikan kontainer setinggi viewport */
+            text-align: center; /* Memastikan teks di dalam paragraf rata tengah */
+            padding: 0 20px; /* Opsional, untuk sedikit memberikan ruang pada tepi layar */
+        }
+        
+        #homepage p {
+            max-width: 800px; /* Batasi lebar paragraf untuk keterbacaan yang baik */
+        }
+
+        #homepage img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            margin-bottom: 0px;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: none; /* Hidden initially */
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .back-button a {
+            text-decoration: none;
+            background-color: #cc3f67;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .back-button a:hover {
+            background-color: #003285; 
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #cc3f67;
+            padding: 0px 0; /* Tambahkan padding untuk memberi ruang lebih */
+            text-align: center;
+            width: 100%;
+            height: 50px; /* Beri tinggi minimum */
+            margin-top: 0px; /* Pastikan ada jarak dari elemen sebelumnya */
+            flex-shrink: 0; /* Pastikan footer tidak mengecil */
+            box-sizing: border-box;
+            }
+            
+            footer p {
+                color: #fce8eb;
+                font-size: 18px; /* Ubah ukuran teks jika perlu */
+                margin: 0;
+                text-align: center;
+            }
+
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>CAZY</h1>
+            <nav>
+                <ul>
+                    <li class="dropdown">
+                        <a href="#">Clothes</a>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="showProducts('tops')">Tops</a>
+                            <a href="#" onclick="showProducts('pants-skirts')">Pants-Skirts</a>
+                            <a href="#" onclick="showProducts('Dress')">Dress</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Bags</a>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="showProducts('slingbags')">Sling Bags</a>
+                            <a href="#" onclick="showProducts('shoulderbags')">Shoulder Bags</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Accessories</a>
+                        <div class="dropdown-content">
+                            <a href="#" onclick="showProducts('bracelets')">Bracelets</a>
+                            <a href="#" onclick="showProducts('scarves')">Scarves</a>
+                            <a href="#" onclick="showProducts('belts')">Belts</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Homepage Section -->
+    <div id="homepage">
+        <p>Welcome to <strong>CAZY</strong>, your ultimate source for your outfit of the day. Whether you're looking for the latest fashion trends or stylish accessories, we've got you covered. Explore our curated collections of clothes, bags and accessories to help you express your unique style and creativity. Let CAZY be your style guide!</p>
+        <img src="https://img.ws.mms.shopee.co.id/id-11134210-7qukz-lh76mt04cvxn2f" alt="CAZY Home Banner">
+    </div>
+
+    <!-- Product Sections -->
+    <div class="container">
+        <!-- Clothes Section -->
+        <div id="tops" class="product-grid">
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/files/IMG_9038_2048x2048.jpg?v=1706005963" alt="Brown Top">
+                <h3>Brown Top</h3>
+                <p>Rp130.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7r990-lp4pv92yiaod0a" alt="Black Cardi">
+                <h3>Black Cardi</h3>
+                <p>Rp150.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7r98o-luwxl9rhfr1tf0" alt="Knit Top">
+                <h3>Knit Top</h3>
+                <p>Rp130.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7r992-lvk80o6ecfzm72" alt="Blue Shirt">
+                <h3>Blue Shirt</h3>
+                <p>Rp200.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7r98w-lptlz77tl7ha20" alt="Red Knit Cardi">
+                <h3>Red Knit Cardi</h3>
+                <p>Rp150.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/files/1CFEE494-077F-407E-BA5B-BCD49DE31174.jpg?v=1694105801" alt="Blue Blazer">
+                <h3>Blue Blazer</h3>
+                <p>Rp300.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7r98t-lmbm027f8dunc8" alt="Stripped Sweater">
+                <h3>Stripped Sweater</h3>
+                <p>Rp160.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134201-23030-q92p1tylwfov0e" alt="Jacket">
+                <h3>Jacket</h3>
+                <p>Rp300.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/98/MTA-143532557/brd-60517_madison-kemeja-denim-crop-aesthete-your-life_full02-6abfbbbb.jpg" alt="Black Crop Top">
+                <h3>Black Crop Top</h3>
+                <p>Rp250.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/files/87AE6D85-495F-4565-81FD-3336130F7227_1512x.jpg?v=1691493533" alt="Blazer">
+                <h3>Blazer</h3>
+                <p>Rp300.000</p>
+            </div>
+        </div>
+
+        <div id="pants-skirts" class="product-grid">
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/files/IMG_9035_2048x2048.jpg?v=1706005963" alt="Long Beige Pants">
+                <h3>Long Beige Pants </h3>
+                <p>Rp200.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/files/CAE105FB-6FD5-43F5-AB6E-9E1298CAEEAC_VSCO.jpg?v=1718793185" alt="Casual Short Pants">
+                <h3>Casual Short Pants</h3>
+                <p>Rp180.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7r98x-lof55z2vytqf8a" alt="Long Browny skirt">
+                <h3>Long Browny Skirt</h3>
+                <p>Rp250.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/products/69297914-A1C9-44CD-A786-FDA7D14EC55B_2048x2048.jpg?v=1706849259" alt="Beige Cargo pants">
+                <h3>Beige Cargo Pants</h3>
+                <p>Rp230.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/products/5ACFE197-1904-4EA6-9C3A-7E6A2D18DCD5.jpg?v=1701340336" alt="Black Cargo Pants">
+                <h3>Black Cargo Pants </h3>
+                <p>Rp170.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7r98q-lnregadrqs95ec" alt="Long Beige Skirt">
+                <h3>Long Beige Skirt</h3>
+                <p>Rp250.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7r991-lxe4q1wuqsryb4" alt="Beige Skirt">
+                <h3>Beige Skirt</h3>
+                <p>Rp190.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7r98s-llesck8w3ipw61" alt="Flare Pants">
+                <h3>Flare Pants</h3>
+                <p>Rp230.000</p>
+            </div>
+            <div class="product">
+                <img src="<div class="product">
+                    <img src="https://down-id.img.susercontent.com/file/id-11134207-7r990-llipgknsg13882" alt="Grey Skirt">
+                    <h3>Grey Skirt</h3>
+                    <p>Rp200.000</p>
+                </div>
+                <div class="product">
+                    <img src="https://tse2.mm.bing.net/th?id=OIP.r9YF2j5BYnHlQnOnkxC7HQHaLH&pid=Api&P=0&h=180" alt="Black Flare Pants">
+                    <h3>Black Flare Pants</h3>
+                    <p>Rp210.000</p>
+                </div>
+            </div>
+
+        <div id="Dress" class="product-grid">
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/files/1418A072-8CD7-408D-A18C-0058A281F25E.jpg?v=1713777654" alt="Brown Dress">
+                <h3>Brown Dress</h3>
+                <p>Rp200.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/files/08807397-7B66-4FC2-B965-F47E380B069D_1_c46717ec-fa6e-4f74-92c7-30a0cc79a7ff.jpg?v=1683890255" alt="Casual Dress">
+                <h3>Casual Dress</h3>
+                <p>Rp190.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/files/id-11134201-23020-fzes8sbx6inv78_2048x2048.jpg?v=1691655412" alt="Misty Grey Dress">
+                <h3>Misty Grey Dress</h3>
+                <p>Rp250.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7r98p-lmbm027ffee9d5" alt="Long Browny Dress">
+                <h3>Long Browny Dress</h3>
+                <p>Rp230.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/84/MTA-161214312/no-brand_no-brand_full01.jpg" alt="Long Red Dress">
+                <h3>Long Red Dress</h3>
+                <p>Rp230.000</p>
+            </div>
+            <div class="product">
+                <img src="https://down-id.img.susercontent.com/file/id-11134201-23030-89ktpf1mcoov8f" alt="Red Dress">
+                <h3>Red Dress</h3>
+                <p>Rp200.000</p>
+            </div>
+            <div class="product">
+                <img src="http://ecinos.id/cdn/shop/files/8B89FA54-9432-4421-AC4F-461CFC64A951_1200x1200.jpg?v=1713867946" alt="Black Dress">
+                <h3>Black Dress</h3>
+                <p>Rp150.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/files/ED1AE87F-2773-4967-B6E9-8DD88EBC8BE3_2048x2048.jpg?v=1713777612" alt="Army Dress">
+                <h3>Army Dress</h3>
+                <p>Rp230.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/files/3C1E24B4-D2B7-4851-AD6D-F9116BB5E4E6_2_2048x2048.jpg?v=1713777279" alt="White Casual Dress">
+                <h3>White Casual Dress</h3>
+                <p>Rp190.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ecinos.id/cdn/shop/files/152567FB-9F25-4792-8EA1-18DF60827978_1_a950e6c6-c3f7-49ff-b2ff-8195aaa104ac_2048x2048.jpg?v=1683890255" alt="Denim Dress">
+                <h3>Denim Dress</h3>
+                <p>Rp230.000</p>
+            </div>
+        </div>
+
+        <!-- Bags Section -->
+        <div id="slingbags" class="product-grid">
+            <div class="product">
+                <img src="https://www.charleskeith.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-ck-products/default/dwc92cba78/images/hi-res/2020-L2-CK2-50270419-01-3.jpg?sw=1152&sh=1536" alt="Sling Bag">
+                <h3>Sling Bag</h3>
+                <p>Rp200.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.charleskeith.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-ck-products/default/dw1d4b1643/images/hi-res/2022-L3-CK2-20840464-10-03-1.jpg?sw=1152&sh=1536" alt="Sling Bag">
+                <h3>Sling Bag</h3>
+                <p>Rp350.000</p>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/b0/5e/e8/b05ee8c61647d4dca39726dfe894c93f.jpg" alt="Sling Bag">
+                <h3>Sling Bag</h3>
+                <p>Rp200.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.pedroshoes.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-pd-products/default/dw6e5de0c5/images/hi-res/2021-L3-PW2-56610016-01-2.jpg?sw=580&sh=774" alt="Sling Bag">
+                <h3>Sling Bag</h3>
+                <p>Rp300.000</p>
+            </div>
+            <div class="product">
+                <img src="http://cdn.shopify.com/s/files/1/0288/1404/9355/collections/PW2-76390032-08-02_1200x1200.jpg?v=1589279838" alt="Sling Bag">
+                <h3>Sling Bag</h3>
+                <p>Rp400.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.pedroshoes.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-pd-products/default/dw7cab74d3/images/hi-res/2023-L3-PW2-75210149-13-1.jpg?sw=1152&sh=1536" alt="Sling Bag">
+                <h3>Sling Bag</h3>
+                <p>Rp250.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.pedroshoes.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-pd-products/default/dw55bda64b/images/hi-res/2021-L6-PW2-75210115-01-2.jpg?sw=1152&sh=1536" alt="Sling Bag">
+                <h3>Sling Bag</h3>
+                <p>Rp400.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.pedroshoes.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-pd-products/default/dw0af6db77/images/hi-res/2023-L2-PW2-75210145-41-2.jpg?sw=1152&sh=1536" alt="Sling Bag">
+                <h3>Sling Bag</h3>
+                <p>Rp300.000</p>
+            </div>
+            <div class="product">
+                <img src="https://media.karousell.com/media/photos/products/2020/03/23/pedro_structured_flap_shoulder_bag_in_multi_1584956649_442870d7_progressive.jpg" alt="Sling Bag">
+                <h3>Sling Bag</h3>
+                <p>Rp400.000</p>
+            </div>
+            <div class="product">
+                <img src="https://my-test-11.slatic.net/p/fe94dd89995e0a9cf80387f664b0b7ab.jpg" alt="Sling Bag">
+                <h3>Sling Bag</h3>
+                <p>Rp500.000</p>
+            </div>
+        </div>
+
+        <div id="shoulderbags" class="product-grid">
+            <div class="product">
+                <img src="https://www.charleskeith.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-ck-products/default/dwc56fa81d/images/hi-res/2023-L6-CK2-40782191-D1-1.jpg?sw=1152&sh=1536" alt="Shoulder Bag">
+                <h3>Shoulder Bag</h3>
+                <p>Rp300.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.pedroshoes.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-pd-products/default/dw782554ee/images/hi-res/2023-L3-PW2-75210149-13-2.jpg?sw=1152&sh=1536" alt="Shoulder Bag">
+                <h3>Shoulder Bag</h3>
+                <p>Rp450.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.pedroshoes.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-pd-products/default/dwc586b361/images/hi-res/2022-L7-PW2-76390093-10-2.jpg?sw=1152&sh=1536" alt="Shoulder Bag">
+                <h3>Shoulder Bag</h3>
+                <p>Rp400.000</p>
+            </div>
+            <div class="product">
+                <img src="https://tse4.mm.bing.net/th?id=OIP.IW2n-ipH9k-jxNzJ41qjlgHaIa&pid=Api&P=0&h=180" alt="Shoulder Bag">
+                <h3>Shoulder Bag</h3>
+                <p>Rp400.000</p>
+            </div>
+            <div class="product">
+                <img src="https://cdna.lystit.com/1040/1300/n/photos/coach/5610f127/coach-Pewterflax-Luna-Shoulder-Bag.jpeg" alt="Shoulder Bag">
+                <h3>Shoulder Bag 1</h3>
+                <p>Rp350.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.tods.com/fashion/tods/XBWTSAX0000RORS410/XBWTSAX0000RORS410-03.jpg?imwidth=810" alt="Shoulder Bag">
+                <h3>Shoulder Bag 2</h3>
+                <p>Rp500.000</p>
+            </div>
+            <div class="product">
+                <img src="https://cdn-images.farfetch-contents.com/18/78/80/26/18788026_41969694_1000.jpg" alt="Shoulder Bag">
+                <h3>Shoulder Bag</h3>
+                <p>Rp400.000</p>
+            </div>
+            <div class="product">
+                <img src="https://tse2.mm.bing.net/th?id=OIP.Q2KMlLNN6cQNX2NbDWgm-QHaIa&pid=Api&P=0&h=180" alt="Shoulder Bag">
+                <h3>Shoulder Bag</h3>
+                <p>Rp350.000</p>
+            </div>
+            <div class="product">
+                <img src="https://img.giglio.com/images/prodZoom/378715.244_1.jpg" alt="Shoulder Bag">
+                <h3>Shoulder Bag</h3>
+                <p>Rp500.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.pedroshoes.com/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-pd-products/default/dw782554ee/images/hi-res/2023-L3-PW2-75210149-13-2.jpg?sw=1152&sh=1536" alt="Shoulder Bag">
+                <h3>Shoulder Bag</h3>
+                <p>Rp450.000</p>
+            </div>
+        </div>
+
+        <!-- Accessories Section -->
+        <div id="bracelets" class="product-grid">
+            <div class="product">
+                <img src="https://tse3.mm.bing.net/th?id=OIP.wysezU_V-e_tmfpj7VijygHaHa&pid=Api&P=0&h=180" alt="Bracelet">
+                <h3>Bracelet</h3>
+                <p>Rp250.000</p>
+            </div>
+            <div class="product">
+                <img src="https://us.pandora.net/dw/image/v2/AAVX_PRD/on/demandware.static/-/Sites-pandora-master-catalog/default/dw993902e7/productimages/singlepackshot/592324C01_RGB.jpg?sw=1200&sh=1200&sm=fit&sfrm=png&bgcolor=F5F5F5" alt="Bracelet">
+                <h3>Bracelet</h3>
+                <p>Rp200.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.francisandgaye.co.uk/images/pandora-moments-black-double-woven-leather-bracelet-p28103-38754_medium.jpg" alt="Bracelet">
+                <h3>Bracelet</h3>
+                <p>Rp250.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ca.pandora.net/dw/image/v2/AAVX_PRD/on/demandware.static/-/Sites-pandora-master-catalog/default/dwe86eea96/productimages/main/599544C01-D_RGB.JPG?sw=1000&sh=1000&sm=fit&sfrm=png&bgcolor=F5F5F5" alt="Bracelet">
+                <h3>Bracelet</h3>
+                <p>Rp300.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.francisandgaye.co.uk/images/limited-edition-pandora-moments-sparkling-snowflake-clasp-bangle-p43089-70029_image.jpg" alt="Bracelet">
+                <h3>Bracelet</h3>
+                <p>Rp250.000</p>
+            </div>
+            <div class="product">
+                <img src="https://cdn.shoplightspeed.com/shops/606632/files/49978072/1024x1024x1/pandora-pandora-bracelet-sparkling-snowflake-clasp.jpg" alt="Bracelet">
+                <h3>Bracelet</h3>
+                <p>Rp400.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.bijourama.com/media/produits/pandora-bijoux/img/bracelet-pandora--femme-597943_1166495_1200x1200.jpg" alt="Bracelet">
+                <h3>Bracelet</h3>
+                <p>Rp250.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ca.pandora.net/dw/image/v2/AAVX_PRD/on/demandware.static/-/Sites-pandora-master-catalog/default/dw57939cd4/productimages/singlepackshot/792026C01_V5_RGB.jpg?sw=1200&sh=1200&sm=fit&sfrm=png&bgcolor=F5F5F5" alt="Bracelet">
+                <h3>Bracelet</h3>
+                <p>Rp400.000</p>
+            </div>
+            <div class="product">
+                <img src="https://i.otto.de/i/otto/9a70227c-1e7a-553b-bf7c-77fc5d6ac647/pandora-armband-pandora-moments-heart-t-bar-snake-chain-bracelet-14k-rose-gold-plated.jpg?$formatz$" alt="Bracelet">
+                <h3>Bracelet</h3>
+                <p>Rp450.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.francisandgaye.co.uk/images/pandora-silver-bracelet-with-pav%C3%A9-heart-clasp-p18594-20654_image.jpg" alt="Bracelet">
+                <h3>Bracelet</h3>
+                <p>Rp200.000</p>
+            </div>
+        </div>
+
+        <div id="scarves" class="product-grid">
+            <div class="product">
+                <img src="https://cdna.lystit.com/photos/2013/10/19/hackett-multi-coloured-multi-stripe-scarf-product-1-14288242-516121374.jpeg" alt="Scarf">
+                <h3>Scarf</h3>
+                <p>Rp250.000</p>
+            </div>
+            <div class="product">
+                <img src="https://pngimg.com/uploads/scarf/scarf_PNG25.png" alt="Scarf">
+                <h3>Scarf</h3>
+                <p>Rp450.000</p>
+            </div>
+            <div class="product">
+                <img src="https://m.media-amazon.com/images/I/81B1fWkCYrL._AC_UL1500_.jpg" alt="Scarf">
+                <h3>Scarf</h3>
+                <p>Rp350.000</p>
+            </div>
+            <div class="product">
+                <img src="https://pngimg.com/uploads/scarf/scarf_PNG25.png" alt="Scarf">
+                <h3>Scarf</h3>
+                <p>Rp450.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.anniedesigncrochet.com/wp-content/uploads/2022/10/chunky-scarf-1-1-795x1024.jpg" alt="Scarf">
+                <h3>Scarf</h3>
+                <p>Rp350.000</p>
+            </div>
+            <div class="product">
+                <img src="https://pngimg.com/uploads/scarf/scarf_PNG25.png" alt="Scarf">
+                <h3>Scarf</h3>
+                <p>Rp500.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.sevenstore.com/images/products/large/4079418.jpg" alt="Scarf">
+                <h3>Scarf</h3>
+                <p>Rp300.000</p>
+            </div>
+            <div class="product">
+                <img src="https://i5.walmartimages.com/asr/4b13bfe6-d286-48c2-abf9-25ca44dd9d37_1.32c35513b13f3dcda377bce0abd8dbbe.jpeg" alt="Scarf">
+                <h3>Scarf</h3>
+                <p>Rp350.000</p>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/originals/6e/80/dd/6e80dd13776efcd3e027670a20320832.jpg" alt="Scarf">
+                <h3>Scarf</h3>
+                <p>Rp430.000</p>
+            </div>
+            <div class="product">
+                <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/450229/item/goods_67_450229.jpg" alt="Scarf">
+                <h3>Scarf</h3>
+                <p>Rp340.000</p>
+            </div>
+        </div>
+
+        <div id="belts" class="product-grid">
+            <div class="product">
+                <img src="https://tse1.mm.bing.net/th?id=OIP.pdJkarhBt5jgLefouX3ULQHaFo&pid=Api&P=0&h=180" alt="Belt">
+                <h3>Belt</h3>
+                <p>Rp265.000</p>
+            </div>
+            <div class="product">
+                <img src="https://i5.walmartimages.com/asr/a8ca873c-1bc3-4042-9e50-618302bff54e.6e3a0aede96f6cc833050a64ea0651c8.jpeg" alt="Belt">
+                <h3>Belt</h3>
+                <p>Rp250.000</p>
+            </div>
+            <div class="product">
+                <img src="https://i5.walmartimages.com/asr/e49cd7e4-e9c5-486e-92fa-a860f3bcaf5a_1.199cbf16566f7a5399ca91f437a08319.jpeg" alt="Belt">
+                <h3>Belt</h3>
+                <p>Rp350.000</p>
+            </div>
+            <div class="product">
+                <img src="https://i.etsystatic.com/20592143/r/il/ffe2b6/2191018134/il_1140xN.2191018134_75q8.jpg" alt="Belt">
+                <h3>Belt</h3>
+                <p>Rp350.000</p>
+            </div>
+            <div class="product">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/61i%2BA4mHb2L._AC_UL1200_.jpg" alt="Belt">
+                <h3>Belt</h3>
+                <p>Rp305.000</p>
+            </div>
+            <div class="product">
+                <img src="https://ae01.alicdn.com/kf/HTB1wGfocaAoBKNjSZSyq6yHAVXaJ/Bg-477-Cool-women-full-studded-black-leather-belts-for-dresses-designer-handmade-wide-stretch-belt.jpg" alt="Belt">
+                <h3>Belt</h3>
+                <p>Rp500.000</p>
+            </div>
+            <div class="product">
+                <img src="https://i.etsystatic.com/10786576/r/il/e8a259/2973971304/il_1588xN.2973971304_ejka.jpg" alt="Belt">
+                <h3>Belt</h3>
+                <p>Rp350.000</p>
+            </div>
+            <div class="product">
+                <img src="https://www.hollywoodreporter.com/wp-content/uploads/2021/07/Gucci-Leather-Belt-e1625771092889.jpeg?resize=300" alt="Belt">
+                <h3>Belt</h3>
+                <p>Rp400.000</p>
+            </div>
+            <div class="product">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/61CGequVnhL._AC_UL1000_.jpg" alt="Belt">
+                <h3>Belt</h3>
+                <p>Rp455.000</p>
+            </div>
+            <div class="product">
+                <img src="https://c.shld.net/rpx/i/s/i/spin/0/prod_21291110612??hei=64&wid=64&qlt=50" alt="Belt">
+                <h3>Belt</h3>
+                <p>Rp450.000</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-button">
+        <a href="#" onclick="showHomepage()">Back</a>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 CAZY. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript Section -->
+    <script>
+        function showProducts(category) {
+            // Hide homepage
+            document.getElementById("homepage").style.display = "none";
+    
+            // Hide footer
+            document.querySelector("footer").style.display = "none";
+    
+            // Hide all product grids
+            const grids = document.querySelectorAll(".product-grid");
+            grids.forEach(grid => grid.classList.remove("active"));
+    
+            // Show the selected product grid
+            const selectedGrid = document.getElementById(category);
+            if (selectedGrid) {
+                selectedGrid.classList.add("active");
+            }
+    
+            // Show the back button
+            document.querySelector(".back-button").style.display = "block";
+        }
+    
+        function showHomepage() {
+            // Show homepage
+            document.getElementById("homepage").style.display = "block";
+    
+            // Show footer
+            document.querySelector("footer").style.display = "block";
+    
+            // Hide all product grids
+            const grids = document.querySelectorAll(".product-grid");
+            grids.forEach(grid => grid.classList.remove("active"));
+    
+            // Hide the back button
+            document.querySelector(".back-button").style.display = "none";
+        }
+    
+        // Tambahkan event listener untuk menangani klik dropdown
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.addEventListener('click', function(event) {
+                event.stopPropagation(); // Mencegah klik pada elemen lain di luar dropdown
+    
+                // Toggle dropdown tampil/tersembunyi
+                const dropdownContent = this.querySelector('.dropdown-content');
+                const isDisplayed = dropdownContent.style.display === 'block';
+    
+                // Sembunyikan semua dropdown terlebih dahulu
+                document.querySelectorAll('.dropdown-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+    
+                // Jika dropdown yang diklik sedang tersembunyi, tampilkan
+                if (!isDisplayed) {
+                    dropdownContent.style.display = 'block';
+                }
+            });
+        });
+    
+        // Sembunyikan dropdown ketika mengklik di luar dropdown
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.dropdown-content').forEach(content => {
+                content.style.display = 'none';
+            });
+        });
+    </script>
+    
+</body>
+</html> 
